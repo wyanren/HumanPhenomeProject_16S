@@ -1,1 +1,5 @@
-
+------------------------------------
+Check the completeness of each file
+  md5sum -c *.txt
+------------------------------------
+gzip -d *.gz
