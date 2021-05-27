@@ -1,5 +1,11 @@
 ------------------------------------
-Check the completeness of each file
+###Check the completeness of each file
   md5sum -c *.txt
 ------------------------------------
+###QC --- Quality Control
 gzip -d *.gz
+for i in *.fq
+do
+  fastqc -t 20 -o ./ $i
+done
+------------------------------------
