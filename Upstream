@@ -9,3 +9,25 @@ do
   fastqc -t 20 -o ./ $i
 done
 ------------------------------------
+
+
+qiime alignment mafft --i-sequences rep-seqs-dada2_merged.qza --o-alignment aligned_rep-seqs_merged.qza 
+
+qiime alignment mask --i-alignment aligned_rep-seqs_merged.qza --o-masked-alignment masked-aligned-rep-seqs_merged.qza
+
+qiime phylogeny fasttree --i-alignment masked-aligned-rep-seqs_merged.qza --o-tree unrooted-tree_merged.qza
+
+qiime phylogeny midpoint-root --i-tree unrooted-tree_merged.qza --o-rooted-tree rooted-tree_merged.qza
+
+qiime diversity core-metrics-phylogenetic --i-phylogeny rooted-tree_merged.qza --i-table table-dada2_merged.qza --p-sampling-depth 6000 --m-metadata-file metadata_merged.txt --output-dir core-metrics-results
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results/faith_pd_vector_merged.qza --m-metadata-file metadata_merged.txt --o-visualization core-metrics-results/faith_pd-group-significance.qzv
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results/faith_pd_vector_merged.qza --m-metadata-file metadata_merged.txt --o-visualization core-metrics-results/faith_pd-group-significance.qzv
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results/evenness_vector_merged.qza --m-metadata-file metadata_merged.txt --o-visualization core-metrics-results/evenness-group-significance.qzv
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results/observed_otus_vector_merged.qza --m-metadata-file metadata_merged.txt --o-visualization core-metrics-results/observed_otus-group-significance.qzv
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results/shannon_vector_merged.qza --m-metadata-file metadata_merged.txt --o-visualization core-metrics-results/shannon-group-significance.qzv
