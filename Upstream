@@ -9,7 +9,401 @@ do
   fastqc -t 20 -o ./ $i
 done
 ------------------------------------
+qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path H1_FKDL210113139-1a  --output-path H1.qza 
 
+qiime cutadapt demux-paired --i-seqs N2.qza --m-forward-barcodes-file metadata_N2.txt --m-forward-barcodes-column barcode-sequence --p-error-rate 0 --o-per-sample-sequences demultiplexed-N2.qza --o-untrimmed-sequences untrimmed-N2.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences demultiplexed-N2.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences trimmed-N2.qza --verbose
+
+qiime demux summarize --i-data trimmed-N2.qza --o-visualization trimmed-N2.qzv
+
+qiime demux summarize --i-data demultiplexed-N2.qza --o-visualization demultiplexed-N2.qzv
+
+#qiime dada2 denoise-paired
+
+#qiime dada2 denoise-paired --i-demultiplexed-seqs trimmed-N2.qza --p-trunc-len-f 180 --p-trunc-len-r 180 --o-representative-sequences rep-seqs-dada2-N2.qza --o-table table-dada2-N2.qza --o-denoising-stats stats-dada2-N2.qza --p-n-threads 30
+
+qiime metadata tabulate --m-input-file stats-dada2-N2.qza --o-visualization stats-dada2-N2.qzv
+
+qiime feature-table summarize --i-table table-dada2-N2.qza --o-visualization table-dada2-N2.qzv --m-sample-metadata-file metadata_N2.txt
+
+qiime metadata tabulate --m-input-file stats-dada2-N2.qza --o-visualization stats-dada2-N2.qzv
+
+qiime feature-table tabulate-seqs --i-data rep-seqs-dada2-N2.qza --o-visualization rep-seqs-dada2-N2.qzv
+
+qiime phylogeny align-to-tree-mafft-fasttree --i-sequences rep-seqs-dada2-N2.qza --o-alignment aligned-rep-seqs-N2.qza --o-masked-alignment masked-aligned-rep-seqs-N2.qza --o-tree unrooted-tree-N2.qza --o-rooted-tree rooted-tree-N2.qza
+
+qiime diversity alpha-rarefaction --i-table table-dada2-N2.qza --i-phylogeny rooted-tree-N2.qza --p-max-depth 8000 --m-metadata-file metadata_N2.txt --o-visualization alpha-rarefaction-N2.qzv
+
+################################################################################################################################################################################
+################################################################################################################################################################################
+################################################################################################################################################################################
+
+
+qiime cutadapt demux-paired --i-seqs N3.qza --m-forward-barcodes-file metadata_N3.txt --m-forward-barcodes-column barcode-sequence --p-error-rate 0 --o-per-sample-sequences demultiplexed-N3.qza --o-untrimmed-sequences untrimmed-N3.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences demultiplexed-N3.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences trimmed-N3.qza --verbose
+
+qiime demux summarize --i-data trimmed-N3.qza --o-visualization trimmed-N3.qzv
+
+qiime demux summarize --i-data demultiplexed-N3.qza --o-visualization demultiplexed-N3.qzv
+
+# 这里需要根据demultipexed的qzv结果来看
+#qiime dada2 denoise-paired --i-demultiplexed-seqs trimmed-N3.qza --p-trunc-len-f 180 --p-trunc-len-r 193 --o-representative-sequences rep-seqs-dada2-N3.qza --o-table table-dada2-N3.qza --o-denoising-stats stats-dada2-N3.qza --p-n-threads 30
+
+qiime metadata tabulate --m-input-file stats-dada2-N3.qza --o-visualization stats-dada2-N3.qzv
+
+qiime feature-table summarize --i-table table-dada2-N3.qza --o-visualization table-dada2-N3.qzv --m-sample-metadata-file metadata_N3.txt
+
+qiime metadata tabulate --m-input-file stats-dada2-N3.qza --o-visualization stats-dada2-N3.qzv
+
+qiime feature-table tabulate-seqs --i-data rep-seqs-dada2-N3.qza --o-visualization rep-seqs-dada2-N3.qzv
+
+qiime phylogeny align-to-tree-mafft-fasttree --i-sequences rep-seqs-dada2-N3.qza --o-alignment aligned-rep-seqs-N3.qza --o-masked-alignment masked-aligned-rep-seqs-N3.qza --o-tree unrooted-tree-N3.qza --o-rooted-tree rooted-tree-N3.qza
+
+qiime diversity alpha-rarefaction --i-table table-dada2-N3.qza --i-phylogeny rooted-tree-N3.qza --p-max-depth 8000 --m-metadata-file metadata_N3.txt --o-visualization alpha-rarefaction-N3.qzv
+
+################################################################################################################################################################################
+################################################################################################################################################################################
+################################################################################################################################################################################
+
+qiime cutadapt demux-paired --i-seqs N4.qza --m-forward-barcodes-file metadata_N4.txt --m-forward-barcodes-column barcode-sequence --p-error-rate 0 --o-per-sample-sequences demultiplexed-N4.qza --o-untrimmed-sequences untrimmed-N4.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences demultiplexed-N4.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences trimmed-N4.qza --verbose
+
+qiime demux summarize --i-data trimmed-N4.qza --o-visualization trimmed-N4.qzv
+
+qiime demux summarize --i-data demultiplexed-N4.qza --o-visualization demultiplexed-N4.qzv
+
+# 这里需要根据demultipexed的qzv结果来看
+qiime dada2 denoise-paired --i-demultiplexed-seqs trimmed-N4.qza --p-trunc-len-f 179 --p-trunc-len-r 192 --o-representative-sequences rep-seqs-dada2-N4.qza --o-table table-dada2-N4.qza --o-denoising-stats stats-dada2-N4.qza --p-n-threads 30
+
+qiime metadata tabulate --m-input-file stats-dada2-N4.qza --o-visualization stats-dada2-N4.qzv
+
+qiime feature-table summarize --i-table table-dada2-N4.qza --o-visualization table-dada2-N4.qzv --m-sample-metadata-file metadata_N4.txt
+
+qiime metadata tabulate --m-input-file stats-dada2-N4.qza --o-visualization stats-dada2-N4.qzv
+
+qiime feature-table tabulate-seqs --i-data rep-seqs-dada2-N4.qza --o-visualization rep-seqs-dada2-N4.qzv
+
+qiime phylogeny align-to-tree-mafft-fasttree --i-sequences rep-seqs-dada2-N4.qza --o-alignment aligned-rep-seqs-N4.qza --o-masked-alignment masked-aligned-rep-seqs-N4.qza --o-tree unrooted-tree-N4.qza --o-rooted-tree rooted-tree-N4.qza
+
+qiime diversity alpha-rarefaction --i-table table-dada2-N4.qza --i-phylogeny rooted-tree-N4.qza --p-max-depth 8000 --m-metadata-file metadata_N4.txt --o-visualization alpha-rarefaction-N4.qzv
+
+
+################################################################################################################################################################################
+################################################################################################################################################################################
+################################################################################################################################################################################
+
+qiime cutadapt demux-paired --i-seqs H1.qza --m-forward-barcodes-file metadata_H1.txt --m-forward-barcodes-column barcode-sequence --p-error-rate 0 --o-per-sample-sequences demultiplexed-H1.qza --o-untrimmed-sequences untrimmed-H1.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences demultiplexed-H1.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences trimmed-H1.qza --verbose
+
+qiime demux summarize --i-data trimmed-H1.qza --o-visualization trimmed-H1.qzv
+
+qiime demux summarize --i-data demultiplexed-H1.qza --o-visualization demultiplexed-H1.qzv
+
+# 这里需要根据demultipexed的qzv结果来看
+qiime dada2 denoise-paired --i-demultiplexed-seqs trimmed-H1.qza --p-trunc-len-f 197 --p-trunc-len-r 164 --o-representative-sequences rep-seqs-dada2-H1.qza --o-table table-dada2-H1.qza --o-denoising-stats stats-dada2-H1.qza --p-n-threads 30
+
+qiime metadata tabulate --m-input-file stats-dada2-H1.qza --o-visualization stats-dada2-H1.qzv
+
+qiime feature-table summarize --i-table table-dada2-H1.qza --o-visualization table-dada2-H1.qzv --m-sample-metadata-file metadata_H1.txt
+
+qiime metadata tabulate --m-input-file stats-dada2-H1.qza --o-visualization stats-dada2-H1.qzv
+
+qiime feature-table tabulate-seqs --i-data rep-seqs-dada2-H1.qza --o-visualization rep-seqs-dada2-H1.qzv
+
+qiime phylogeny align-to-tree-mafft-fasttree --i-sequences rep-seqs-dada2-H1.qza --o-alignment aligned-rep-seqs-H1.qza --o-masked-alignment masked-aligned-rep-seqs-H1.qza --o-tree unrooted-tree-H1.qza --o-rooted-tree rooted-tree-H1.qza
+
+qiime diversity alpha-rarefaction --i-table table-dada2-H1.qza --i-phylogeny rooted-tree-H1.qza --p-max-depth 8000 --m-metadata-file metadata_H1.txt --o-visualization alpha-rarefaction-H1.qzv
+
+################################################################################################################################################################################
+################################################################################################################################################################################
+################################################################################################################################################################################
+
+qiime cutadapt demux-paired --i-seqs H2.qza --m-forward-barcodes-file metadata_H2.txt --m-forward-barcodes-column barcode-sequence --p-error-rate 0 --o-per-sample-sequences demultiplexed-H2.qza --o-untrimmed-sequences untrimmed-H2.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences demultiplexed-H2.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences trimmed-H2.qza --verbose
+
+qiime demux summarize --i-data trimmed-H2.qza --o-visualization trimmed-H2.qzv
+
+qiime demux summarize --i-data demultiplexed-H2.qza --o-visualization demultiplexed-H2.qzv
+
+# 这里需要根据demultipexed的qzv结果来看
+qiime dada2 denoise-paired --i-demultiplexed-seqs trimmed-H2.qza --p-trunc-len-f 178 --p-trunc-len-r 173 --o-representative-sequences rep-seqs-dada2-H2.qza --o-table table-dada2-H2.qza --o-denoising-stats stats-dada2-H2.qza --p-n-threads 30
+
+qiime metadata tabulate --m-input-file stats-dada2-H2.qza --o-visualization stats-dada2.qzv
+
+qiime feature-table summarize --i-table table-dada2-H2.qza --o-visualization table-dada2-H2.qzv --m-sample-metadata-file metadata_H2.txt
+
+qiime metadata tabulate --m-input-file stats-dada2-H2.qza --o-visualization stats-dada2-H2.qzv
+
+qiime feature-table tabulate-seqs --i-data rep-seqs-dada2-H2.qza --o-visualization rep-seqs-dada2-H2.qzv
+
+qiime phylogeny align-to-tree-mafft-fasttree --i-sequences rep-seqs-dada2-H2.qza --o-alignment aligned-rep-seqs-H2.qza --o-masked-alignment masked-aligned-rep-seqs-H2.qza --o-tree unrooted-tree-H2.qza --o-rooted-tree rooted-tree-H2.qza
+
+qiime diversity alpha-rarefaction --i-table table-dada2-H2.qza --i-phylogeny rooted-tree-H2.qza --p-max-depth 8000 --m-metadata-file metadata_H2.txt --o-visualization alpha-rarefaction-H2.qzv
+
+################################################################################################################################################################################
+################################################################################################################################################################################
+################################################################################################################################################################################
+
+qiime cutadapt demux-paired --i-seqs H3.qza --m-forward-barcodes-file metadata_H3.txt --m-forward-barcodes-column barcode-sequence --p-error-rate 0 --o-per-sample-sequences demultiplexed-H3.qza --o-untrimmed-sequences untrimmed-H3.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences demultiplexed-H3.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences trimmed-H3.qza --verbose
+
+qiime demux summarize --i-data trimmed-H3.qza --o-visualization trimmed-H3.qzv
+
+qiime demux summarize --i-data demultiplexed-H3.qza --o-visualization demultiplexed-H3.qzv
+
+# 这里需要根据demultipexed的qzv结果来看
+qiime dada2 denoise-paired --i-demultiplexed-seqs trimmed-H3.qza --p-trunc-len-f 176 --p-trunc-len-r 192 --o-representative-sequences rep-seqs-dada2-H3.qza --o-table table-dada2-H3.qza --o-denoising-stats stats-dada2-H3.qza --p-n-threads 30
+
+qiime metadata tabulate --m-input-file stats-dada2-H3.qza --o-visualization stats-dada2.qzv
+
+qiime feature-table summarize --i-table table-dada2-H3.qza --o-visualization table-dada2-H3.qzv --m-sample-metadata-file metadata_H3.txt
+
+qiime metadata tabulate --m-input-file stats-dada2-H3.qza --o-visualization stats-dada2-H3.qzv
+
+qiime feature-table tabulate-seqs --i-data rep-seqs-dada2-H3.qza --o-visualization rep-seqs-dada2-H3.qzv
+
+qiime phylogeny align-to-tree-mafft-fasttree --i-sequences rep-seqs-dada2-H3.qza --o-alignment aligned-rep-seqs-H3.qza --o-masked-alignment masked-aligned-rep-seqs-H3.qza --o-tree unrooted-tree-H3.qza --o-rooted-tree rooted-tree-H3.qza
+
+qiime diversity alpha-rarefaction --i-table table-dada2-H3.qza --i-phylogeny rooted-tree-H3.qza --p-max-depth 8000 --m-metadata-file metadata_H3.txt --o-visualization alpha-rarefaction-H3.qzv
+
+################################################################################################################################################################################
+################################################################################################################################################################################
+################################################################################################################################################################################
+
+qiime cutadapt demux-paired --i-seqs H4.qza --m-forward-barcodes-file metadata_H4.txt --m-forward-barcodes-column barcode-sequence --p-error-rate 0 --o-per-sample-sequences demultiplexed-H4.qza --o-untrimmed-sequences untrimmed-H4.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences demultiplexed-H4.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences trimmed-H4.qza --verbose
+
+qiime demux summarize --i-data trimmed-H4.qza --o-visualization trimmed-H4.qzv
+
+qiime demux summarize --i-data demultiplexed-H4.qza --o-visualization demultiplexed-H4.qzv
+
+# 这里需要根据demultipexed的qzv结果来看
+qiime dada2 denoise-paired --i-demultiplexed-seqs trimmed-H4.qza --p-trunc-len-f 179 --p-trunc-len-r 192 --o-representative-sequences rep-seqs-dada2-H4.qza --o-table table-dada2-H4.qza --o-denoising-stats stats-dada2-H4.qza --p-n-threads 30
+
+qiime metadata tabulate --m-input-file stats-dada2-H4.qza --o-visualization stats-dada2.qzv
+
+qiime feature-table summarize --i-table table-dada2-H4.qza --o-visualization table-dada2-H4.qzv --m-sample-metadata-file metadata_H4.txt
+
+qiime metadata tabulate --m-input-file stats-dada2-H4.qza --o-visualization stats-dada2-H4.qzv
+
+qiime feature-table tabulate-seqs --i-data rep-seqs-dada2-H4.qza --o-visualization rep-seqs-dada2-H4.qzv
+
+qiime phylogeny align-to-tree-mafft-fasttree --i-sequences rep-seqs-dada2-H4.qza --o-alignment aligned-rep-seqs-H4.qza --o-masked-alignment masked-aligned-rep-seqs-H4.qza --o-tree unrooted-tree-H4.qza --o-rooted-tree rooted-tree-H4.qza
+
+qiime diversity alpha-rarefaction --i-table table-dada2-H4.qza --i-phylogeny rooted-tree-H4.qza --p-max-depth 8000 --m-metadata-file metadata_H4.txt --o-visualization alpha-rarefaction-H4.qzv
+
+################################################################################################################################################################################
+################################################################################################################################################################################
+################################################################################################################################################################################
+
+qiime cutadapt demux-paired --i-seqs O1.qza --m-forward-barcodes-file metadata_O1.txt --m-forward-barcodes-column barcode-sequence --p-error-rate 0 --o-per-sample-sequences demultiplexed-O1.qza --o-untrimmed-sequences untrimmed-O1.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences demultiplexed-O1.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences trimmed-O1.qza --verbose
+
+qiime demux summarize --i-data trimmed-O1.qza --o-visualization trimmed-O1.qzv
+
+qiime demux summarize --i-data demultiplexed-O1.qza --o-visualization demultiplexed-O1.qzv
+
+# 这里需要根据demultipexed的qzv结果来看
+qiime dada2 denoise-paired --i-demultiplexed-seqs trimmed-O1.qza --p-trunc-len-f 179 --p-trunc-len-r 192 --o-representative-sequences rep-seqs-dada2-O1.qza --o-table table-dada2-O1.qza --o-denoising-stats stats-dada2-O1.qza --p-n-threads 30
+
+qiime metadata tabulate --m-input-file stats-dada2-O1.qza --o-visualization stats-dada2.qzv
+
+qiime feature-table summarize --i-table table-dada2-O1.qza --o-visualization table-dada2-O1.qzv --m-sample-metadata-file metadata_O1.txt
+
+qiime metadata tabulate --m-input-file stats-dada2-O1.qza --o-visualization stats-dada2-O1.qzv
+
+qiime feature-table tabulate-seqs --i-data rep-seqs-dada2-O1.qza --o-visualization rep-seqs-dada2-O1.qzv
+
+qiime phylogeny align-to-tree-mafft-fasttree --i-sequences rep-seqs-dada2-O1.qza --o-alignment aligned-rep-seqs-O1.qza --o-masked-alignment masked-aligned-rep-seqs-O1.qza --o-tree unrooted-tree-O1.qza --o-rooted-tree rooted-tree-O1.qza
+
+qiime diversity alpha-rarefaction --i-table table-dada2-O1.qza --i-phylogeny rooted-tree-O1.qza --p-max-depth 8000 --m-metadata-file metadata_O1.txt --o-visualization alpha-rarefaction-O1.qzv
+
+################################################################################################################################################################################
+################################################################################################################################################################################
+################################################################################################################################################################################
+
+qiime cutadapt demux-paired --i-seqs O2.qza --m-forward-barcodes-file metadata_O2.txt --m-forward-barcodes-column barcode-sequence --p-error-rate 0 --o-per-sample-sequences demultiplexed-O2.qza --o-untrimmed-sequences untrimmed-O2.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences demultiplexed-O2.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences trimmed-O2.qza --verbose
+
+qiime demux summarize --i-data trimmed-O2.qza --o-visualization trimmed-O2.qzv
+
+qiime demux summarize --i-data demultiplexed-O2.qza --o-visualization demultiplexed-O2.qzv
+
+# 这里需要根据demultipexed的qzv结果来看
+qiime dada2 denoise-paired --i-demultiplexed-seqs trimmed-O2.qza --p-trunc-len-f 179 --p-trunc-len-r 192 --o-representative-sequences rep-seqs-dada2-O2.qza --o-table table-dada2-O2.qza --o-denoising-stats stats-dada2-O2.qza --p-n-threads 30
+
+qiime metadata tabulate --m-input-file stats-dada2-O2.qza --o-visualization stats-dada2.qzv
+
+qiime feature-table summarize --i-table table-dada2-O2.qza --o-visualization table-dada2-O2.qzv --m-sample-metadata-file metadata_O2.txt
+
+qiime metadata tabulate --m-input-file stats-dada2-O2.qza --o-visualization stats-dada2-O2.qzv
+
+qiime feature-table tabulate-seqs --i-data rep-seqs-dada2-O2.qza --o-visualization rep-seqs-dada2-O2.qzv
+
+qiime phylogeny align-to-tree-mafft-fasttree --i-sequences rep-seqs-dada2-O2.qza --o-alignment aligned-rep-seqs-O2.qza --o-masked-alignment masked-aligned-rep-seqs-O2.qza --o-tree unrooted-tree-O2.qza --o-rooted-tree rooted-tree-O2.qza
+
+qiime diversity alpha-rarefaction --i-table table-dada2-O2.qza --i-phylogeny rooted-tree-O2.qza --p-max-depth 8000 --m-metadata-file metadata_O2.txt --o-visualization alpha-rarefaction-O2.qzv
+
+################################################################################################################################################################################
+################################################################################################################################################################################
+################################################################################################################################################################################
+
+qiime cutadapt demux-paired --i-seqs O3.qza --m-forward-barcodes-file metadata_O3.txt --m-forward-barcodes-column barcode-sequence --p-error-rate 0 --o-per-sample-sequences demultiplexed-O3.qza --o-untrimmed-sequences untrimmed-O3.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences demultiplexed-O3.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences trimmed-O3.qza --verbose
+
+qiime demux summarize --i-data trimmed-O3.qza --o-visualization trimmed-O3.qzv
+
+qiime demux summarize --i-data demultiplexed-O3.qza --o-visualization demultiplexed-O3.qzv
+
+# 这里需要根据demultipexed的qzv结果来看
+qiime dada2 denoise-paired --i-demultiplexed-seqs trimmed-O3.qza --p-trunc-len-f 197 --p-trunc-len-r 193 --o-representative-sequences rep-seqs-dada2-O3.qza --o-table table-dada2-O3.qza --o-denoising-stats stats-dada2-O3.qza --p-n-threads 30
+
+qiime metadata tabulate --m-input-file stats-dada2-O3.qza --o-visualization stats-dada2.qzv
+
+qiime feature-table summarize --i-table table-dada2-O3.qza --o-visualization table-dada2-O3.qzv --m-sample-metadata-file metadata_O3.txt
+
+qiime metadata tabulate --m-input-file stats-dada2-O3.qza --o-visualization stats-dada2-O3.qzv
+
+qiime feature-table tabulate-seqs --i-data rep-seqs-dada2-O3.qza --o-visualization rep-seqs-dada2-O3.qzv
+
+qiime phylogeny align-to-tree-mafft-fasttree --i-sequences rep-seqs-dada2-O3.qza --o-alignment aligned-rep-seqs-O3.qza --o-masked-alignment masked-aligned-rep-seqs-O3.qza --o-tree unrooted-tree-O3.qza --o-rooted-tree rooted-tree-O3.qza
+
+qiime diversity alpha-rarefaction --i-table table-dada2-O3.qza --i-phylogeny rooted-tree-O3.qza --p-max-depth 8000 --m-metadata-file metadata_O3.txt --o-visualization alpha-rarefaction-O3.qzv
+
+################################################################################################################################################################################
+################################################################################################################################################################################
+################################################################################################################################################################################	
+
+qiime cutadapt demux-paired --i-seqs O4.qza --m-forward-barcodes-file metadata_O4.txt --m-forward-barcodes-column barcode-sequence --p-error-rate 0 --o-per-sample-sequences demultiplexed-O4.qza --o-untrimmed-sequences untrimmed-O4.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences demultiplexed-O4.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences trimmed-O4.qza --verbose
+
+qiime demux summarize --i-data trimmed-O4.qza --o-visualization trimmed-O4.qzv
+
+qiime demux summarize --i-data demultiplexed-O4.qza --o-visualization demultiplexed-O4.qzv
+
+# 这里需要根据demultipexed的qzv结果来看
+qiime dada2 denoise-paired --i-demultiplexed-seqs trimmed-O4.qza --p-trunc-len-f 180 --p-trunc-len-r 173 --o-representative-sequences rep-seqs-dada2-O4.qza --o-table table-dada2-O4.qza --o-denoising-stats stats-dada2-O4.qza --p-n-threads 30
+
+qiime metadata tabulate --m-input-file stats-dada2-O4.qza --o-visualization stats-dada2.qzv
+
+qiime feature-table summarize --i-table table-dada2-O4.qza --o-visualization table-dada2-O4.qzv --m-sample-metadata-file metadata_O4.txt
+
+ 
+qiime feature-table tabulate-seqs --i-data rep-seqs-dada2-O4.qza --o-visualization rep-seqs-dada2-O4.qzv
+
+qiime phylogeny align-to-tree-mafft-fasttree --i-sequences rep-seqs-dada2-O4.qza --o-alignment aligned-rep-seqs-O4.qza --o-masked-alignment masked-aligned-rep-seqs-O4.qza --o-tree unrooted-tree-O4.qza --o-rooted-tree rooted-tree-O4.qza
+
+qiime diversity alpha-rarefaction --i-table table-dada2-O4.qza --i-phylogeny rooted-tree-O4.qza --p-max-depth 8000 --m-metadata-file metadata_O4.txt --o-visualization alpha-rarefaction-O4.qzv
+
+
+####################################################3
+#开始进行合并
+qiime feature-table merge-seqs \
+--i-data rep-seqs-dada2-H1.qza \
+--i-data rep-seqs-dada2-H2.qza \
+--i-data rep-seqs-dada2-H3.qza \
+--i-data rep-seqs-dada2-H4.qza \
+--i-data rep-seqs-dada2-N2.qza \
+--i-data rep-seqs-dada2-N3.qza \
+--i-data rep-seqs-dada2-N4.qza \
+--i-data rep-seqs-dada2-O1.qza \
+--i-data rep-seqs-dada2-O2.qza \
+--i-data rep-seqs-dada2-O3.qza \
+--i-data rep-seqs-dada2-O4.qza \
+--o-merged-data merged_rep-seqs-dada2.qza
+
+qiime feature-table merge \
+--i-tables table-dada2-H1.qza \
+--i-tables table-dada2-H2.qza \
+--i-tables table-dada2-H3.qza \
+--i-tables table-dada2-H4.qza \
+--i-tables table-dada2-N2.qza \
+--i-tables table-dada2-N3.qza \
+--i-tables table-dada2-N4.qza \
+--i-tables table-dada2-O1.qza \
+--i-tables table-dada2-O2.qza \
+--i-tables table-dada2-O3.qza \
+--i-tables table-dada2-O4.qza \
+--o-merged-table merged_table-dada2.qza
+
+
+#中途断掉了，因为可能没有加threads数，所以特别的慢
+qiime feature-classifier classify-sklearn \
+--i-classifier ../../silva-132-99-515-806-nb-classifier.qza\
+--i-reads merged_rep-seqs-dada2.qza \
+--o-classification merged_taxonomy-silva.qza \
+--p-n-jobs 10
+
+# 515F_806R #####
+qiime feature-classifier classify-consensus-vsearch \
+--i-query merged_rep-seqs-dada2.qza \
+--i-reference-reads /home/disk2/DATABAE/QIIME2/silva-138-99-seqs-515-806.qza \
+--i-reference-taxonomy /home/disk2/DATABAE/QIIME2/silva-138-99-tax-515-806.qza \
+--p-threads 30 \
+--o-classification merged_vsearch_515_806_taxonomy.txt
+
+qiime metadata tabulate --m-input-file merged_vsearch_515_806_taxonomy.txt.qza --o-visualization merged_vsearch_515_806_taxonomy.txt.qzv                                                              
+# 这一步骤是简单的可视化
+qiime taxa barplot --i-table merged_table-dada2.qza --i-taxonomy merged_vsearch_515_806_taxonomy.txt.qza --m-metadata-file merged_metadata.txt --o-visualization merged_vsearch_bar-plots.qzv
+
+# wholelength，尝试了一下，发现没有什么区别~
+qiime feature-classifier classify-consensus-vsearch --i-query merged_rep-seqs-dada2.qza --i-reference-reads /home/disk2/DATABAE/QIIME2/silva-138-99-seqs.qza --i-reference-taxonomy /home/disk2/DATABAE/QIIME2/silva-138-99-tax.qza --p-threads 30 --o-classification merged_vsearch_wholelength_taxonomy.txt
+qiime metadata tabulate --m-input-file merged_vsearch_wholelength_taxonomy.txt.qza --o-visualization merged_vsearch_wholelength_taxonomy.qzv
+qiime taxa barplot --i-table merged_table-dada2.qza --i-taxonomy merged_vsearch_wholelength_taxonomy.txt.qza --m-metadata-file merged_metadata.txt --o-visualization merged_vsearch_wholelength_bar-plots.qzv
+qiime vsearch cluster-features-de-novo --i-table merged_table-dada2.qza --i-sequences merged_rep-seqs-dada2.qza --p-perc-identity 0.97 --o-clustered-table merged_table-dn-97.qza --o-clustered-sequences merged_seqs-dn-97.qza
+
+# de-novo结果
+qiime tools export --input-path merged_table-dn-97.qza --output-path phyloseq
+biom convert -i phyloseq/feature-table.biom -o phyloseq/otu_table.tsv --to-tsv 
+
+# 
+
+
+
+qiime tools export --input-path merged_vsearch_515_806_taxonomy.txt.qza --output-path export  
+
+sed -i -e '1 s/Feature/#Feature/' -e '1 s/Taxon/taxonomy/' export/taxonomy.tsv  
+
+qiime tools export --input-path merged_table-dada2.qza --output-path export 
+
+biom add-metadata -i export/feature-table.biom -o export/feature-table-add-annotation.biom --observation-metadata-fp export/taxonomy.tsv --sc-separated taxonomy
+biom convert -i export/feature-table-add-annotation.biom -o export/feature-table-add-annotation.txt --to-tsv --header-key taxonomy
+
+summarize_taxa.py -i feature-table-add-annotation.biom -o summarize
+
+
+
+qiime alignment mafft --i-sequences merged_rep-seqs-dada2.qza --o-alignment merged_aligned_rep-seqs.qza 
+
+qiime alignment mask --i-alignment merged_aligned_rep-seqs.qza --o-masked-alignment merged_masked-aligned-rep-seqs.qza
+
+qiime phylogeny fasttree --i-alignment merged_masked-aligned-rep-seqs.qza --o-tree merged_unrooted-tree.qza
+
+qiime phylogeny midpoint-root --i-tree merged_unrooted-tree.qza --o-rooted-tree merged_rooted-tree.qza
+
+qiime diversity core-metrics-phylogenetic --i-phylogeny merged_rooted-tree.qza --i-table merged_table-dada2.qza --p-sampling-depth 6000 --m-metadata-file merged_metadata.txt --output-dir core-metrics-results
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results/faith_pd_vector.qza --m-metadata-file merged_metadata.txt --o-visualization core-metrics-results/faith_pd-group-significance.qzv
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results/faith_pd_vector.qza --m-metadata-file merged_metadata.txt --o-visualization core-metrics-results/faith_pd-group-significance.qzv
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results/evenness_vector.qza --m-metadata-file merged_metadata.txt --o-visualization core-metrics-results/evenness-group-significance.qzv
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results/observed_otus_vector.qza --m-metadata-file merged_metadata.txt --o-visualization core-metrics-results/observed_otus-group-significance.qzv
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results/shannon_vector.qza --m-metadata-file merged_metadata.txt --o-visualization core-metrics-results/shannon-group-significance.qzv
 
 qiime alignment mafft --i-sequences rep-seqs-dada2_merged.qza --o-alignment aligned_rep-seqs_merged.qza 
 
