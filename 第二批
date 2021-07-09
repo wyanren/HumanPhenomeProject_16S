@@ -1,0 +1,309 @@
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path B1_FKDL210162367-1a --output-path seqs_raw-B1.qza
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path B2_FKDL210162368-1a --output-path seqs_raw-B2.qza
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path B3_FKDL210162369-1a --output-path seqs_raw-B3.qza
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path B4_FKDL210162370-1a --output-path seqs_raw-B4.qza
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path M1_FKDL210162371-1a --output-path seqs_raw-M1.qza
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path M2_FKDL210162372-1a --output-path seqs_raw-M2.qza
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path S1_FKDL210162359-1a --output-path seqs_raw-S1.qza
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path S2_FKDL210162360-1a --output-path seqs_raw-S2.qza
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path S3_FKDL210162361-1a --output-path seqs_raw-S3.qza
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path S4_FKDL210162362-1a --output-path seqs_raw-S4.qza
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path VF1_FKDL210162363-1a --output-path seqs_raw-VF1.qza
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path VF2_FKDL210162364-1a --output-path seqs_raw-VF2.qza
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path VF3_FKDL210162365-1a --output-path seqs_raw-VF3.qza
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path VF4_FKDL210162366-1a --output-path seqs_raw-VF4.qza
+#qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path N1_FKDL210162358-1a --output-path seqs_raw-N1.qza
+
+--------------------------------------------------------------------------------------------------------------------------------------
+ssh 67
+conda activate qiime2     
+cd ../disk2/wyr-pheono/3.analysis
+
+#qiime cutadapt demux-paired --i-seqs seqs_raw-B1.qza --m-forward-barcodes-file metadata_B1.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-B1.qza --o-untrimmed-sequences seqs_untrimmed-B1.qza --verbose
+#qiime cutadapt demux-paired --i-seqs seqs_raw-B2.qza --m-forward-barcodes-file metadata_B2.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-B2.qza --o-untrimmed-sequences seqs_untrimmed-B2.qza --verbose
+#qiime cutadapt demux-paired --i-seqs seqs_raw-B3.qza --m-forward-barcodes-file metadata_B3.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-B3.qza --o-untrimmed-sequences seqs_untrimmed-B3.qza --verbose
+#qiime cutadapt demux-paired --i-seqs seqs_raw-B4.qza --m-forward-barcodes-file metadata_B4.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-B4.qza --o-untrimmed-sequences seqs_untrimmed-B4.qza --verbose
+#qiime cutadapt demux-paired --i-seqs seqs_raw-N1.qza --m-forward-barcodes-file metadata_N1.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-N1.qza --o-untrimmed-sequences seqs_untrimmed-N1.qza --verbose
+#qiime cutadapt demux-paired --i-seqs seqs_raw-M1.qza --m-forward-barcodes-file metadata_M1.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-M1.qza --o-untrimmed-sequences seqs_untrimmed-M1.qza --verbose
+#qiime cutadapt demux-paired --i-seqs seqs_raw-M2.qza --m-forward-barcodes-file metadata_M2.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-M2.qza --o-untrimmed-sequences seqs_untrimmed-M2.qza --verbose
+#qiime cutadapt demux-paired --i-seqs seqs_raw-VF1.qza --m-forward-barcodes-file metadata_VF1.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-VF1.qza --o-untrimmed-sequences seqs_untrimmed-VF1.qza --verbose
+qiime cutadapt demux-paired --i-seqs seqs_raw-VF2.qza --m-forward-barcodes-file metadata_VF2.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-VF2.qza --o-untrimmed-sequences seqs_untrimmed-VF2.qza --verbose
+qiime cutadapt demux-paired --i-seqs seqs_raw-VF3.qza --m-forward-barcodes-file metadata_VF3.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-VF3.qza --o-untrimmed-sequences seqs_untrimmed-VF3.qza --verbose
+qiime cutadapt demux-paired --i-seqs seqs_raw-VF4.qza --m-forward-barcodes-file metadata_VF4.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-VF4.qza --o-untrimmed-sequences seqs_untrimmed-VF4.qza --verbose
+qiime cutadapt demux-paired --i-seqs seqs_raw-S1.qza --m-forward-barcodes-file metadata_S1.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-S1.qza --o-untrimmed-sequences seqs_untrimmed-S1.qza --verbose
+#qiime cutadapt demux-paired --i-seqs seqs_raw-S2.qza --m-forward-barcodes-file metadata_S2.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-S2.qza --o-untrimmed-sequences seqs_untrimmed-S2.qza --verbose
+#qiime cutadapt demux-paired --i-seqs seqs_raw-S3.qza --m-forward-barcodes-file metadata_S3.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-S3.qza --o-untrimmed-sequences seqs_untrimmed-S3.qza --verbose
+#qiime cutadapt demux-paired --i-seqs seqs_raw-S4.qza --m-forward-barcodes-file metadata_S4.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-S4.qza --o-untrimmed-sequences seqs_untrimmed-S4.qza --verbose
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-B1.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-B1.qza --verbose
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-B2.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-B2.qza --verbose
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-B3.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-B3.qza --verbose
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-B4.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-B4.qza --verbose
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-VF1.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-VF1.qza --verbose
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-VF2.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-VF2.qza --verbose
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-VF3.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-VF3.qza --verbose
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-VF4.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-VF4.qza --verbose
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-N1.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-N1.qza --verbose
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-M1.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-M1.qza --verbose
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-M2.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-M2.qza --verbose
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-S1.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-S1.qza --verbose
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-S2.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-S2.qza --verbose
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-S3.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-S3.qza --verbose
+#qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-S4.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-S4.qza --verbose
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+qiime demux summarize --i-data seqs_trimmed-B1.qza --o-visualization seqs_trimmed-B1.qzv
+qiime demux summarize --i-data seqs_trimmed-B2.qza --o-visualization seqs_trimmed-B2.qzv
+qiime demux summarize --i-data seqs_trimmed-B3.qza --o-visualization seqs_trimmed-B3.qzv
+qiime demux summarize --i-data seqs_trimmed-B4.qza --o-visualization seqs_trimmed-B4.qzv
+qiime demux summarize --i-data seqs_trimmed-VF1.qza --o-visualization seqs_trimmed-VF1.qzv
+qiime demux summarize --i-data seqs_trimmed-VF2.qza --o-visualization seqs_trimmed-VF2.qzv
+qiime demux summarize --i-data seqs_trimmed-VF3.qza --o-visualization seqs_trimmed-VF3.qzv
+qiime demux summarize --i-data seqs_trimmed-VF4.qza --o-visualization seqs_trimmed-VF4.qzv
+qiime demux summarize --i-data seqs_trimmed-S1.qza --o-visualization seqs_trimmed-S1.qzv
+qiime demux summarize --i-data seqs_trimmed-S2.qza --o-visualization seqs_trimmed-S2.qzv
+qiime demux summarize --i-data seqs_trimmed-S3.qza --o-visualization seqs_trimmed-S3.qzv
+qiime demux summarize --i-data seqs_trimmed-S4.qza --o-visualization seqs_trimmed-S4.qzv
+qiime demux summarize --i-data seqs_trimmed-M1.qza --o-visualization seqs_trimmed-M1.qzv
+qiime demux summarize --i-data seqs_trimmed-M2.qza --o-visualization seqs_trimmed-M2.qzv
+qiime demux summarize --i-data seqs_trimmed-N1.qza --o-visualization seqs_trimmed-N1.qzv
+
+--------------------------------------------------------------------------------------------------------------------------------------
+B1
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-B1.qza --p-trunc-len-f 168 --p-trunc-len-r 166 --o-representative-sequences seqs_rep_dada2-B1.qza --o-table table_rep_dada2-B1.qza --o-denoising-stats stats_rep_dada2-B1.qza --p-n-threads 30
+B2
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-B2.qza --p-trunc-len-f 161 --p-trunc-len-r 196 --o-representative-sequences seqs_rep_dada2-B2.qza --o-table table_rep_dada2-B2.qza --o-denoising-stats stats_rep_dada2-B2.qza --p-n-threads 30
+B3
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-B3.qza --p-trunc-len-f 182 --p-trunc-len-r 204 --o-representative-sequences seqs_rep_dada2-B3.qza --o-table table_rep_dada2-B3.qza --o-denoising-stats stats_rep_dada2-B3.qza --p-n-threads 30
+B4
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-B4.qza --p-trunc-len-f 182 --p-trunc-len-r 197 --o-representative-sequences seqs_rep_dada2-B4.qza --o-table table_rep_dada2-B4.qza --o-denoising-stats stats_rep_dada2-B4.qza --p-n-threads 30
+VF1
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-VF1.qza --p-trunc-len-f 157 --p-trunc-len-r 166 --o-representative-sequences seqs_rep_dada2-VF1.qza --o-table table_rep_dada2-VF1.qza --o-denoising-stats stats_rep_dada2-VF1.qza --p-n-threads 30
+VF2
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-VF2.qza --p-trunc-len-f 170 --p-trunc-len-r 166 --o-representative-sequences seqs_rep_dada2-VF2.qza --o-table table_rep_dada2-VF2.qza --o-denoising-stats stats_rep_dada2-VF2.qza --p-n-threads 30
+VF3
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-VF3.qza --p-trunc-len-f 169 --p-trunc-len-r 166 --o-representative-sequences seqs_rep_dada2-VF3.qza --o-table table_rep_dada2-VF3.qza --o-denoising-stats stats_rep_dada2-VF3.qza --p-n-threads 30
+VF4
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-VF4.qza --p-trunc-len-f 170 --p-trunc-len-r 166 --o-representative-sequences seqs_rep_dada2-VF4.qza --o-table table_rep_dada2-VF4.qza --o-denoising-stats stats_rep_dada2-VF4.qza --p-n-threads 30
+S1
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-S1.qza --p-trunc-len-f 170 --p-trunc-len-r 166 --o-representative-sequences seqs_rep_dada2-S1.qza --o-table table_rep_dada2-S1.qza --o-denoising-stats stats_rep_dada2-S1.qza --p-n-threads 30
+S2
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-S2.qza --p-trunc-len-f 169 --p-trunc-len-r 166 --o-representative-sequences seqs_rep_dada2-S2.qza --o-table table_rep_dada2-S2.qza --o-denoising-stats stats_rep_dada2-S2.qza --p-n-threads 30
+S3
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-S3.qza --p-trunc-len-f 169 --p-trunc-len-r 166 --o-representative-sequences seqs_rep_dada2-S3.qza --o-table table_rep_dada2-S3.qza --o-denoising-stats stats_rep_dada2-S3.qza --p-n-threads 30
+S4
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-S4.qza --p-trunc-len-f 169 --p-trunc-len-r 166 --o-representative-sequences seqs_rep_dada2-S4.qza --o-table table_rep_dada2-S4.qza --o-denoising-stats stats_rep_dada2-S4.qza --p-n-threads 30
+M1
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-M1.qza --p-trunc-len-f 180 --p-trunc-len-r 181 --o-representative-sequences seqs_rep_dada2-M1.qza --o-table table_rep_dada2-M1.qza --o-denoising-stats stats_rep_dada2-M1.qza --p-n-threads 30
+M2
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-M2.qza --p-trunc-len-f 181 --p-trunc-len-r 186 --o-representative-sequences seqs_rep_dada2-M2.qza --o-table table_rep_dada2-M2.qza --o-denoising-stats stats_rep_dada2-M2.qza --p-n-threads 30
+N1
+#qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-N1.qza --p-trunc-len-f 157 --p-trunc-len-r 176 --o-representative-sequences seqs_rep_dada2-N1.qza --o-table table_rep_dada2-N1.qza --o-denoising-stats stats_rep_dada2-N1.qza --p-n-threads 30
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+#qiime feature-table merge-seqs \
+--i-data seqs_rep_dada2-B1.qza \
+--i-data seqs_rep_dada2-B2.qza \
+--i-data seqs_rep_dada2-B3.qza \
+--i-data seqs_rep_dada2-B4.qza \
+--o-merged-data seqs_rep_dada2-B.qza
+
+#qiime feature-table merge-seqs \
+--i-data seqs_rep_dada2-VF1.qza \
+--i-data seqs_rep_dada2-VF2.qza \
+--i-data seqs_rep_dada2-VF3.qza \
+--i-data seqs_rep_dada2-VF4.qza \
+--o-merged-data seqs_rep_dada2-VF.qza
+
+qiime feature-table merge-seqs \
+--i-data seqs_rep_dada2-S1.qza \
+--i-data seqs_rep_dada2-S2.qza \
+--i-data seqs_rep_dada2-S3.qza \
+--i-data seqs_rep_dada2-S4.qza \
+--o-merged-data seqs_rep_dada2-S.qza
+
+qiime feature-table merge-seqs \
+--i-data seqs_rep_dada2-N1.qza \
+--i-data seqs_rep_dada2-N2.qza \
+--i-data seqs_rep_dada2-N3.qza \
+--i-data seqs_rep_dada2-N4.qza \
+--o-merged-data seqs_rep_dada2-N.qza
+
+qiime feature-table merge-seqs \
+--i-data seqs_rep_dada2-H1.qza \
+--i-data seqs_rep_dada2-H2.qza \
+--i-data seqs_rep_dada2-H3.qza \
+--i-data seqs_rep_dada2-H4.qza \
+--o-merged-data seqs_rep_dada2-H.qza
+
+qiime feature-table merge-seqs \
+--i-data seqs_rep_dada2-O1.qza \
+--i-data seqs_rep_dada2-O2.qza \
+--i-data seqs_rep_dada2-O3.qza \
+--i-data seqs_rep_dada2-O4.qza \
+--o-merged-data seqs_rep_dada2-O.qza
+
+qiime feature-table merge-seqs \
+--i-data seqs_rep_dada2-M1.qza \
+--i-data seqs_rep_dada2-M2.qza \
+--o-merged-data seqs_rep_dada2-M.qza
+
+qiime feature-table merge-seqs \
+--i-data seqs_rep_dada2-B.qza \
+--i-data seqs_rep_dada2-N.qza \
+--i-data seqs_rep_dada2-VF.qza \
+--i-data seqs_rep_dada2-S.qza \
+--i-data seqs_rep_dada2-O.qza \
+--i-data seqs_rep_dada2-H.qza \
+--i-data seqs_rep_dada2-M.qza \
+--o-merged-data seqs_rep_dada2-summing.qza
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+#qiime feature-table merge \
+--i-tables table_rep_dada2-B1.qza \
+--i-tables table_rep_dada2-B2.qza \
+--i-tables table_rep_dada2-B3.qza \
+--i-tables table_rep_dada2-B4.qza \
+--o-merged-table table_rep_dada2-B.qza
+
+#qiime feature-table merge \
+--i-tables table_rep_dada2-S1.qza \
+--i-tables table_rep_dada2-S2.qza \
+--i-tables table_rep_dada2-S3.qza \
+--i-tables table_rep_dada2-S4.qza \
+--o-merged-table table_rep_dada2-S.qza
+
+#qiime feature-table merge \
+--i-tables table_rep_dada2-VF1.qza \
+--i-tables table_rep_dada2-VF2.qza \
+--i-tables table_rep_dada2-VF3.qza \
+--i-tables table_rep_dada2-VF4.qza \
+--o-merged-table table_rep_dada2-VF.qza
+
+qiime feature-table merge \
+--i-tables table_rep_dada2-N1.qza \
+--i-tables table_rep_dada2-N2.qza \
+--i-tables table_rep_dada2-N3.qza \
+--i-tables table_rep_dada2-N4.qza \
+--o-merged-table table_rep_dada2-N.qza
+
+#qiime feature-table merge \
+--i-tables table_rep_dada2-H1.qza \
+--i-tables table_rep_dada2-H2.qza \
+--i-tables table_rep_dada2-H3.qza \
+--i-tables table_rep_dada2-H4.qza \
+--o-merged-table table_rep_dada2-H.qza
+
+#qiime feature-table merge \
+--i-tables table_rep_dada2-O1.qza \
+--i-tables table_rep_dada2-O2.qza \
+--i-tables table_rep_dada2-O3.qza \
+--i-tables table_rep_dada2-O4.qza \
+--o-merged-table table_rep_dada2-O.qza
+
+#qiime feature-table merge \
+--i-tables table_rep_dada2-M1.qza \
+--i-tables table_rep_dada2-M2.qza \
+--o-merged-table table_rep_dada2-M.qza
+
+qiime feature-table merge \
+--i-tables table_rep_dada2-B.qza \
+--i-tables table_rep_dada2-N.qza \
+--i-tables table_rep_dada2-VF.qza \
+--i-tables table_rep_dada2-S.qza \
+--i-tables table_rep_dada2-O.qza \
+--i-tables table_rep_dada2-H.qza \
+--i-tables table_rep_dada2-M.qza \
+--o-merged-table table_rep_dada2-summing.qza
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+qiime feature-table summarize --i-table table_rep_dada2-VF.qza --o-visualization table_rep_dada2-VF.qzv --m-sample-metadata-file metadata-VF.txt
+qiime feature-table summarize --i-table table_rep_dada2-S.qza --o-visualization table_rep_dada2-S.qzv --m-sample-metadata-file metadata-S.txt
+qiime feature-table summarize --i-table table_rep_dada2-H.qza --o-visualization table_rep_dada2-H.qzv --m-sample-metadata-file metadata-H.txt
+qiime feature-table summarize --i-table table_rep_dada2-O.qza --o-visualization table_rep_dada2-O.qzv --m-sample-metadata-file metadata-O.txt
+qiime feature-table summarize --i-table table_rep_dada2-N.qza --o-visualization table_rep_dada2-N.qzv --m-sample-metadata-file metadata-N.txt
+qiime feature-table summarize --i-table table_rep_dada2-B.qza --o-visualization table_rep_dada2-B.qzv --m-sample-metadata-file metadata-B.txt
+qiime feature-table summarize --i-table table_rep_dada2-M.qza --o-visualization table_rep_dada2-M.qzv --m-sample-metadata-file metadata-M.txt
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+qiime alignment mafft \
+--i-sequences seqs_rep_dada2-summing.qza \
+--o-alignment aligned_seqs_rep-summing.qza \
+--p-n-threads auto
+
+qiime alignment mask \
+--i-alignment aligned_seqs_rep-summing.qza \
+--o-masked-alignment aligned_masked_seqs_rep-summing.qza
+
+qiime phylogeny fasttree \
+--i-alignment aligned_masked_seqs_rep-summing.qza \
+--o-tree unrooted_tree-summing.qza \
+--p-n-threads 30
+
+qiime phylogeny midpoint-root \
+--i-tree unrooted_tree-summing.qza \
+--o-rooted-tree rooted_tree-summing.qza
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+qiime diversity core-metrics-phylogenetic \
+--i-phylogeny rooted_tree-summing.qza \
+--i-table table_rep_dada2-summing.qza \
+--p-sampling-depth 6000 \
+--m-metadata-file metadata-summing.txt \
+--output-dir core-metrics-results
+
+qiime diversity alpha-group-significance \
+--i-alpha-diversity core-metrics-results/faith_pd_vector.qza \
+--m-metadata-file metadata-summing.txt \
+--o-visualization core-metrics-results/faith_pd-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+--i-alpha-diversity core-metrics-results/evenness_vector.qza \
+--m-metadata-file metadata-summing.txt \
+--o-visualization core-metrics-results/evenness-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+--i-alpha-diversity core-metrics-results/observed_otus_vector.qza \
+--m-metadata-file metadata-summing.txt \
+--o-visualization core-metrics-results/observed_otus-group-significance.qzv
+
+qiime diversity alpha-group-significance \
+--i-alpha-diversity core-metrics-results/shannon_vector.qza \
+--m-metadata-file metadata-summing.txt \
+--o-visualization core-metrics-results/shannon-group-significance.qzv
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+qiime feature-classifier classify-consensus-vsearch \
+--i-query seqs_rep_dada2-summing.qza \
+--i-reference-reads /home/disk2/DATABAE/QIIME2/silva-138-99-seqs-515-806.qza \
+--i-reference-taxonomy /home/disk2/DATABAE/QIIME2/silva-138-99-tax-515-806.qza \
+--p-threads 30 \
+--o-classification taxonomy-summing.qza
+
+qiime metadata tabulate \
+--m-input-file taxonomy-summing.qza \
+--o-visualization taxonomy-summing.qzv
+
+qiime taxa barplot\
+ --i-table table_rep_dada2-summing.qza \
+--i-taxonomy taxonomy-summing.qza \
+--m-metadata-file metadata-summing.txt \
+--o-visualization vsearch_bar_plots-summing.qzv
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
