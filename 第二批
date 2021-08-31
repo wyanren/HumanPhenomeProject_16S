@@ -307,3 +307,39 @@ qiime taxa barplot\
 
 
 --------------------------------------------------------------------------------------------------------------------------------------
+这里后面想做离群值筛选，因此得把各个部位的筛选出来
+qiime diversity filter-distance-matrix \
+--i-distance-matrix bray_curtis_distance_matrix.qza \
+--m-metadata-file ../metadata-summing.txt \
+--p-where "[Site]='Back'" \
+--o-filtered-distance-matrix Back_bray_curtis_distance_matrix.qza
+
+qiime diversity filter-distance-matrix \
+--i-distance-matrix bray_curtis_distance_matrix.qza \
+--m-metadata-file ../metadata-summing.txt \
+--p-where "[Site]='Scalp'" \
+--o-filtered-distance-matrix Scalp_bray_curtis_distance_matrix.qza
+
+qiime diversity filter-distance-matrix \
+--i-distance-matrix bray_curtis_distance_matrix.qza \
+--m-metadata-file ../metadata-summing.txt \
+--p-where "[Site]='Spit'" \
+--o-filtered-distance-matrix Spit_bray_curtis_distance_matrix.qza
+
+qiime diversity filter-distance-matrix \
+--i-distance-matrix bray_curtis_distance_matrix.qza \
+--m-metadata-file ../metadata-summing.txt \
+--p-where "[Site]='Forehead'" \
+--o-filtered-distance-matrix Forehead_bray_curtis_distance_matrix.qza
+
+qiime diversity filter-distance-matrix \
+--i-distance-matrix bray_curtis_distance_matrix.qza \
+--m-metadata-file ../metadata-summing.txt \
+--p-where "[Site]='Nare'" \
+--o-filtered-distance-matrix Nare_bray_curtis_distance_matrix.qza
+
+qiime diversity filter-distance-matrix \
+--i-distance-matrix bray_curtis_distance_matrix.qza \
+--m-metadata-file ../metadata-summing.txt \
+--p-where "[Site]='VentralForearm'" \
+--o-filtered-distance-matrix VentralForearm_bray_curtis_distance_matrix.qza
