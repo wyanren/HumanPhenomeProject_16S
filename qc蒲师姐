@@ -1,0 +1,347 @@
+# QC-蒲师姐
+
+qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path /home/disk2/wyr-pheono/QC-蒲师姐/2-二次建库/QC_16S1_FKDL210224149-1a_1 --output-path seqs_raw-QC-2-1.qza
+
+qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path /home/disk2/wyr-pheono/QC-蒲师姐/2-二次建库/QC_16S2_FKDL210224150-1a_1 --output-path seqs_raw-QC-2-2.qza
+
+qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path /home/disk2/wyr-pheono/QC-蒲师姐/2-二次建库/QC_16S3_FKDL210224151-1a_1 --output-path seqs_raw-QC-2-3.qza
+
+qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path /home/disk2/wyr-pheono/QC-蒲师姐/1-二次建库/X101SC21042625-Z01-J001-QC/1.rawdata/QC16s1_FKDL210113143-1a --output-path seqs_raw-QC-1-1.qza
+
+qiime tools import --type MultiplexedPairedEndBarcodeInSequence --input-path /home/disk2/wyr-pheono/QC-蒲师姐/1-二次建库/X101SC21042625-Z01-J001-QC/1.rawdata/QC16s2_FKDL210113144-1a --output-path seqs_raw-QC-1-2.qza
+
+
+qiime cutadapt demux-paired --i-seqs seqs_raw-QC-2_1.qza --m-forward-barcodes-file metadata-2_1.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-QC-2_1.qza --o-untrimmed-sequences seqs_untrimmed-QC-2_1.qza --verbose
+
+qiime cutadapt demux-paired --i-seqs seqs_raw-QC-2_2.qza --m-forward-barcodes-file metadata-2_2.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-QC-2_2.qza --o-untrimmed-sequences seqs_untrimmed-QC-2_2.qza --verbose
+
+qiime cutadapt demux-paired --i-seqs seqs_raw-QC-2_3.qza --m-forward-barcodes-file metadata-2_3.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-QC-2_3.qza --o-untrimmed-sequences seqs_untrimmed-QC-2_3.qza --verbose
+
+qiime cutadapt demux-paired --i-seqs seqs_raw-QC-1_1.qza --m-forward-barcodes-file metadata-1_1.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-QC-1_1.qza --o-untrimmed-sequences seqs_untrimmed-QC-1_1.qza --verbose
+
+qiime cutadapt demux-paired --i-seqs seqs_raw-QC-1_2.qza --m-forward-barcodes-file metadata-1_2.txt --m-forward-barcodes-column forward-barcode --p-error-rate 0 --o-per-sample-sequences seqs_demultiplexed-QC-1_2.qza --o-untrimmed-sequences seqs_untrimmed-QC-1_2.qza --verbose
+
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-QC-1_1.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-QC-1_1.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-QC-1_2.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-QC-1_2.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-QC-2_1.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-QC-2_1.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-QC-2_2.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-QC-2_2.qza --verbose
+
+qiime cutadapt trim-paired --i-demultiplexed-sequences seqs_demultiplexed-QC-2_3.qza --p-cores 30 --p-front-f GTGYCAGCMGCCGCGGTAA --p-front-r GGACTACNVGGGTWTCTAAT --p-error-rate 0 --p-discard-untrimmed --o-trimmed-sequences seqs_trimmed-QC-2_3.qza --verbose
+
+qiime demux summarize --i-data seqs_trimmed-QC-1_1.qza --o-visualization seqs_trimmed-QC-1_1.qzv
+
+qiime demux summarize --i-data seqs_trimmed-QC-1_2.qza --o-visualization seqs_trimmed-QC-1_2.qzv
+
+qiime demux summarize --i-data seqs_trimmed-QC-2_1.qza --o-visualization seqs_trimmed-QC-2_1.qzv
+
+qiime demux summarize --i-data seqs_trimmed-QC-2_2.qza --o-visualization seqs_trimmed-QC-2_2.qzv
+
+qiime demux summarize --i-data seqs_trimmed-QC-2_3.qza --o-visualization seqs_trimmed-QC-2_3.qzv
+
+
+qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-QC-1_1.qza --p-trunc-len-f 165 --p-trunc-len-r 191 --o-representative-sequences seqs_rep_dada2-QC-1_1.qza --o-table table_rep_dada2-QC-1_1.qza --o-denoising-stats stats_rep_dada2-QC-1_1.qza --p-n-threads 30
+
+qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-QC-1_2.qza --p-trunc-len-f 177 --p-trunc-len-r 191 --o-representative-sequences seqs_rep_dada2-QC-1_2.qza --o-table table_rep_dada2-QC-1_2.qza --o-denoising-stats stats_rep_dada2-QC-1_2.qza --p-n-threads 30
+
+
+qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-QC-2_1.qza --p-trunc-len-f 167 --p-trunc-len-r 180 --o-representative-sequences seqs_rep_dada2-QC-2_1.qza --o-table table_rep_dada2-QC-2_1.qza --o-denoising-stats stats_rep_dada2-QC-2_1.qza --p-n-threads 30
+
+
+
+qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-QC-2_2.qza --p-trunc-len-f 167 --p-trunc-len-r 179 --o-representative-sequences seqs_rep_dada2-QC-2_2.qza --o-table table_rep_dada2-QC-2_2.qza --o-denoising-stats stats_rep_dada2-QC-2_2.qza --p-n-threads 30
+
+
+
+qiime dada2 denoise-paired --i-demultiplexed-seqs seqs_trimmed-QC-2_3.qza --p-trunc-len-f 179 --p-trunc-len-r 180 --o-representative-sequences seqs_rep_dada2-QC-2_3.qza --o-table table_rep_dada2-QC-2_3.qza --o-denoising-stats stats_rep_dada2-QC-2_3.qza --p-n-threads 30
+
+
+
+qiime feature-table merge-seqs \
+--i-data seqs_rep_dada2-QC-1_1.qza \
+--i-data seqs_rep_dada2-QC-1_2.qza \
+--o-merged-data seqs_rep_dada2-QC-1.qza
+
+qiime feature-table merge-seqs \
+--i-data seqs_rep_dada2-QC-2_1.qza \
+--i-data seqs_rep_dada2-QC-2_2.qza \
+--i-data seqs_rep_dada2-QC-2_3.qza \
+--o-merged-data seqs_rep_dada2-QC-2.qza
+
+qiime feature-table merge-seqs \
+--i-data seqs_rep_dada2-QC-1.qza \
+--i-data seqs_rep_dada2-QC-2.qza \
+--o-merged-data seqs_rep_dada2-QC.qza
+
+qiime feature-table merge \
+--i-tables table_rep_dada2-QC-2_1.qza \
+--i-tables table_rep_dada2-QC-2_2.qza \
+--i-tables table_rep_dada2-QC-2_3.qza \
+--o-merged-table table_rep_dada2-QC-2.qza
+
+qiime feature-table merge \
+--i-tables table_rep_dada2-QC-1_1.qza \
+--i-tables table_rep_dada2-QC-1_2.qza \
+--o-merged-table table_rep_dada2-QC-1.qza
+
+
+qiime feature-table merge \
+--i-tables table_rep_dada2-QC-1.qza \
+--i-tables table_rep_dada2-QC-2.qza \
+--o-merged-table table_rep_dada2-QC.qza
+
+
+qiime feature-table group \
+--i-table table_rep_dada2-QC.qza \
+--m-metadata-file metadata-sum.txt \
+--m-metadata-column oldSampleID \
+--p-mode sum \
+--o-grouped-table table_rep_dada2-QC-collapse.qza \
+--p-axis sample
+
+
+qiime feature-table summarize \
+--i-table table_rep_dada2-QC-collapse.qza \
+--o-visualization table_rep_dada2-QC-collapse.qzv \
+--m-sample-metadata-file metadata-sum-collapse.txt
+
+qiime feature-classifier classify-consensus-vsearch \
+--i-query seqs_rep_dada2-QC.qza \ 
+--i-reference-reads /home/disk2/DATABAE/QIIME2/silva-138-99-seqs-515-806.qza \
+--i-reference-taxonomy /home/disk2/DATABAE/QIIME2/silva-138-99-tax-515-806.qza \
+--p-threads 30 \
+--o-classification taxonomy.qza
+
+qiime metadata tabulate \
+--m-input-file taxonomy.qza \
+--o-visualization taxonomy.qzv
+
+qiime taxa barplot\
+ --i-table table_rep_dada2-QC-collapse.qza \
+--i-taxonomy taxonomy.qza \
+--m-metadata-file metadata-sum-collapse.txt \
+--o-visualization vsearch_bar-plots.qzv
+
+
+qiime alignment mafft \
+--i-sequences seqs_rep_dada2-QC.qza \
+--o-alignment aligned_seqs_rep.qza 
+
+
+qiime alignment mask \
+--i-alignment aligned_seqs_rep.qza \
+--o-masked-alignment masked_aligned_seqs_rep.qza
+
+qiime phylogeny fasttree \
+--i-alignment masked_aligned_seqs_rep.qza \
+--o-tree unrooted_tree.qza
+
+qiime phylogeny midpoint-root \
+--i-tree unrooted_tree.qza \
+--o-rooted-tree rooted_tree.qza
+
+
+# 这里选择30000作为截断阈值
+qiime diversity alpha-rarefaction \
+--i-table table_rep_dada2-QC-collapse.qza \
+--i-phylogeny rooted_tree.qza \
+--p-max-depth 30000 \
+--m-metadata-file metadata-sum-collapse.txt \
+--o-visualization alpha_rarefaction_30000.qzv
+
+
+qiime feature-table filter-features \
+--i-table table_rep_dada2-QC-collapse.qza \
+--p-min-frequency 2 \
+--o-filtered-table table_rep_dada2-QC-collapse-rm_singletons.qza
+
+
+qiime feature-table filter-samples \
+--i-table table_rep_dada2-QC-collapse-rm_singletons.qza \
+--p-min-frequency 20000 \
+--o-filtered-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000.qza
+
+qiime taxa barplot\
+ --i-table table_rep_dada2-QC-collapse.qza \
+--i-taxonomy taxonomy.qza \
+--m-metadata-file metadata-sum-collapse.txt \
+--o-visualization vsearch_bar-plots.qzv
+
+qiime taxa barplot\
+ --i-table table_rep_dada2-QC-collapse-rm_singletons.qza \
+--i-taxonomy taxonomy.qza \
+--m-metadata-file metadata-sum-collapse.txt \
+--o-visualization vsearch_bar-plots_rm_singletons.qzv
+
+qiime taxa barplot\
+ --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000.qza \
+--i-taxonomy taxonomy.qza \
+--m-metadata-file metadata-sum-collapse.txt \
+--o-visualization vsearch_bar-plots_rm_singletons-filter_20000.qzv
+
+qiime diversity core-metrics-phylogenetic --i-phylogeny rooted_tree.qza --i-table table_rep_dada2-QC-collapse-rm_singletons.qza --p-sampling-depth 4000 --m-metadata-file metadata-sum-collapse.txt --output-dir core-metrics-results-rm_singletons-4000
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-4000/faith_pd_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-4000/faith_pd-group-significance.qzv
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-4000/evenness_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-4000/evenness-group-significance.qzv
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-4000/observed_otus_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-4000/observed_otus-group-significance.qzv
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-4000/shannon_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-4000/shannon-group-significance.qzv
+
+
+qiime diversity core-metrics-phylogenetic --i-phylogeny rooted_tree.qza --i-table table_rep_dada2-QC-collapse-rm_singletons.qza --p-sampling-depth 4000 --m-metadata-file metadata-sum-collapse.txt --output-dir core-metrics-results-rm_singletons-10000
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-10000/faith_pd_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-10000/faith_pd-group-significance.qzv
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-10000/evenness_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-10000/evenness-group-significance.qzv
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-10000/observed_otus_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-10000/observed_otus-group-significance.qzv
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-10000/shannon_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-10000/shannon-group-significance.qzv
+
+
+qiime diversity core-metrics-phylogenetic --i-phylogeny rooted_tree.qza --i-table table_rep_dada2-QC-collapse-rm_singletons.qza --p-sampling-depth 4000 --m-metadata-file metadata-sum-collapse.txt --output-dir core-metrics-results-rm_singletons-20000
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-20000/faith_pd_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-20000/faith_pd-group-significance.qzv
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-20000/evenness_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-20000/evenness-group-significance.qzv
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-20000/observed_otus_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-20000/observed_otus-group-significance.qzv
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-20000/shannon_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-20000/shannon-group-significance.qzv
+
+
+qiime diversity core-metrics-phylogenetic --i-phylogeny rooted_tree.qza --i-table table_rep_dada2-QC-collapse-rm_singletons.qza --p-sampling-depth 4000 --m-metadata-file metadata-sum-collapse.txt --output-dir core-metrics-results-rm_singletons-30000
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-30000/faith_pd_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-30000/faith_pd-group-significance.qzv
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-30000/evenness_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-30000/evenness-group-significance.qzv
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-30000/observed_otus_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-30000/observed_otus-group-significance.qzv
+
+
+qiime diversity alpha-group-significance --i-alpha-diversity core-metrics-results-rm_singletons-30000/shannon_vector.qza --m-metadata-file metadata-sum-collapse.txt --o-visualization core-metrics-results-rm_singletons-30000/shannon-group-significance.qzv
+
+
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/unweighted_unifrac_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/unweighted_unifrac-group-significance_sample_permanova.qzv --p-pairwise --p-method permanova --m-metadata-column sample
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/unweighted_unifrac_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/unweighted_unifrac-group-significance_sample_anosim.qzv --p-pairwise --p-method anosim --m-metadata-column sample
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/unweighted_unifrac_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/unweighted_unifrac-group-significance_method_permanova.qzv --p-pairwise --p-method permanova --m-metadata-column method
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/unweighted_unifrac_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/unweighted_unifrac-group-significance_method_anosim.qzv --p-pairwise --p-method anosim --m-metadata-column method
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/weighted_unifrac_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/weighted_unifrac-group-significance_sample_permanova.qzv --p-pairwise --p-method permanova --m-metadata-column sample
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/weighted_unifrac_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/weighted_unifrac-group-significance_sample_anosim.qzv --p-pairwise --p-method anosim --m-metadata-column sample
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/weighted_unifrac_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/weighted_unifrac-group-significance_method_permanova.qzv --p-pairwise --p-method permanova --m-metadata-column method
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/weighted_unifrac_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/weighted_unifrac-group-significance_method_anosim.qzv --p-pairwise --p-method anosim --m-metadata-column method
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/jaccard_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/jaccard-group-significance_sample_permanova.qzv --p-pairwise --p-method permanova --m-metadata-column sample
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/jaccard_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/jaccard-group-significance_sample_anosim.qzv --p-pairwise --p-method anosim --m-metadata-column sample
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/jaccard_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/jaccard-group-significance_method_permanova.qzv --p-pairwise --p-method permanova --m-metadata-column method
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/jaccard_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/jaccard-group-significance_method_anosim.qzv --p-pairwise --p-method anosim --m-metadata-column method
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/bray_curtis_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/bray_curtis-group-significance_sample_permanova.qzv --p-pairwise --p-method permanova --m-metadata-column sample
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/bray_curtis_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/bray_curtis-group-significance_sample_anosim.qzv --p-pairwise --p-method anosim --m-metadata-column sample
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/bray_curtis_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/bray_curtis-group-significance_method_permanova.qzv --p-pairwise --p-method permanova --m-metadata-column method
+
+
+qiime diversity beta-group-significance --i-distance-matrix core-metrics-results-rm_singletons-30000/bray_curtis_distance_matrix.qza --m-metadata-file metadata-sum-collapse.txt  --o-visualization core-metrics-results-rm_singletons-30000/bray_curtis-group-significance_method_anosim.qzv --p-pairwise --p-method anosim --m-metadata-column method
+
+
+qiime taxa collapse --i-table table_rep_dada2-QC-collapse-rm_singletons.qza --i-taxonomy taxonomy.qza --p-level 1 --o-collapsed-table table_rep_dada2-QC-collapse-rm_singletons-Kingdom.qza
+qiime taxa collapse --i-table table_rep_dada2-QC-collapse-rm_singletons.qza --i-taxonomy taxonomy.qza --p-level 2 --o-collapsed-table table_rep_dada2-QC-collapse-rm_singletons-Phylum.qza
+qiime taxa collapse --i-table table_rep_dada2-QC-collapse-rm_singletons.qza --i-taxonomy taxonomy.qza --p-level 3 --o-collapsed-table table_rep_dada2-QC-collapse-rm_singletons-Class.qza
+qiime taxa collapse --i-table table_rep_dada2-QC-collapse-rm_singletons.qza --i-taxonomy taxonomy.qza --p-level 4 --o-collapsed-table table_rep_dada2-QC-collapse-rm_singletons-Order.qza
+qiime taxa collapse --i-table table_rep_dada2-QC-collapse-rm_singletons.qza --i-taxonomy taxonomy.qza --p-level 5 --o-collapsed-table table_rep_dada2-QC-collapse-rm_singletons-Family.qza
+qiime taxa collapse --i-table table_rep_dada2-QC-collapse-rm_singletons.qza --i-taxonomy taxonomy.qza --p-level 6 --o-collapsed-table table_rep_dada2-QC-collapse-rm_singletons-Genus.qza
+qiime taxa collapse --i-table table_rep_dada2-QC-collapse-rm_singletons.qza --i-taxonomy taxonomy.qza --p-level 7 --o-collapsed-table table_rep_dada2-QC-collapse-rm_singletons-Species.qza
+
+qiime feature-table relative-frequency --i-table table_rep_dada2-QC-collapse-rm_singletons-Kingdom.qza --o-relative-frequency-table table_rep_dada2-QC-collapse-rm_singletons-Kingdom-relative.qza
+qiime feature-table relative-frequency --i-table table_rep_dada2-QC-collapse-rm_singletons-Phylum.qza --o-relative-frequency-table table_rep_dada2-QC-collapse-rm_singletons-Phylum-relative.qza
+qiime feature-table relative-frequency --i-table table_rep_dada2-QC-collapse-rm_singletons-Class.qza --o-relative-frequency-table table_rep_dada2-QC-collapse-rm_singletons-Class-relative.qza
+qiime feature-table relative-frequency --i-table table_rep_dada2-QC-collapse-rm_singletons-Order.qza --o-relative-frequency-table table_rep_dada2-QC-collapse-rm_singletons-Order-relative.qza
+qiime feature-table relative-frequency --i-table table_rep_dada2-QC-collapse-rm_singletons-Family.qza --o-relative-frequency-table table_rep_dada2-QC-collapse-rm_singletons-Family-relative.qza
+qiime feature-table relative-frequency --i-table table_rep_dada2-QC-collapse-rm_singletons-Genus.qza --o-relative-frequency-table table_rep_dada2-QC-collapse-rm_singletons-Genus-relative.qza
+qiime feature-table relative-frequency --i-table table_rep_dada2-QC-collapse-rm_singletons-Species.qza --o-relative-frequency-table table_rep_dada2-QC-collapse-rm_singletons-Species-relative.qza
+
+qiime taxa collapse --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000.qza --i-taxonomy taxonomy.qza --p-level 1 --o-collapsed-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Kingdom.qza
+qiime taxa collapse --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000.qza --i-taxonomy taxonomy.qza --p-level 2 --o-collapsed-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Phylum.qza
+qiime taxa collapse --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000.qza --i-taxonomy taxonomy.qza --p-level 3 --o-collapsed-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Class.qza
+qiime taxa collapse --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000.qza --i-taxonomy taxonomy.qza --p-level 4 --o-collapsed-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Order.qza
+qiime taxa collapse --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000.qza --i-taxonomy taxonomy.qza --p-level 5 --o-collapsed-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Family.qza
+qiime taxa collapse --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000.qza --i-taxonomy taxonomy.qza --p-level 6 --o-collapsed-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Genus.qza
+qiime taxa collapse --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000.qza --i-taxonomy taxonomy.qza --p-level 7 --o-collapsed-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Species.qza
+
+qiime feature-table relative-frequency --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Kingdom.qza --o-relative-frequency-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Kingdom-relative.qza
+qiime feature-table relative-frequency --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Phylum.qza --o-relative-frequency-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Phylum-relative.qza
+qiime feature-table relative-frequency --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Class.qza --o-relative-frequency-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Class-relative.qza
+qiime feature-table relative-frequency --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Order.qza --o-relative-frequency-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Order-relative.qza
+qiime feature-table relative-frequency --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Family.qza --o-relative-frequency-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Family-relative.qza
+qiime feature-table relative-frequency --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Genus.qza --o-relative-frequency-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Genus-relative.qza
+qiime feature-table relative-frequency --i-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Species.qza --o-relative-frequency-table table_rep_dada2-QC-collapse-rm_singletons-filter_20000-Species-relative.qza
+
+cd /Users/yanren/workdir工作区/qc蒲师姐/relative/table_rep_dada2-QC-collapse-rm_singletons-Species-relative/data
+biom convert -i feature-table.biom -o table_rep_dada2-QC-collapse-rm_singletons-Species-relative.txt --to-tsv
+
+cd /Users/yanren/workdir工作区/qc蒲师姐/relative/table_rep_dada2-QC-collapse-rm_singletons-Genus-relative/data
+biom convert -i feature-table.biom -o table_rep_dada2-QC-collapse-rm_singletons-Genus-relative.txt --to-tsv
+
+cd /Users/yanren/workdir工作区/qc蒲师姐/relative/table_rep_dada2-QC-collapse-rm_singletons-Family-relative/data
+biom convert -i feature-table.biom -o table_rep_dada2-QC-collapse-rm_singletons-Family-relative.txt --to-tsv
+
+cd /Users/yanren/workdir工作区/qc蒲师姐/relative/table_rep_dada2-QC-collapse-rm_singletons-Order-relative/data
+biom convert -i feature-table.biom -o table_rep_dada2-QC-collapse-rm_singletons-Order-relative.txt --to-tsv
+
+cd /Users/yanren/workdir工作区/qc蒲师姐/relative/table_rep_dada2-QC-collapse-rm_singletons-Phylum-relative/data
+biom convert -i feature-table.biom -o table_rep_dada2-QC-collapse-rm_singletons-Phylum-relative.txt --to-tsv
+
+cd /Users/yanren/workdir工作区/qc蒲师姐/relative/table_rep_dada2-QC-collapse-rm_singletons-Kingdom-relative/data
+biom convert -i feature-table.biom -o table_rep_dada2-QC-collapse-rm_singletons-Kingdom-relative.txt --to-tsv
+
+cd /Users/yanren/workdir工作区/qc蒲师姐/relative/table_rep_dada2-QC-collapse-rm_singletons-Class-relative/data
+biom convert -i feature-table.biom -o table_rep_dada2-QC-collapse-rm_singletons-Class-relative.txt --to-tsv
+
