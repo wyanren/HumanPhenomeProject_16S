@@ -345,3 +345,17 @@ biom convert -i feature-table.biom -o table_rep_dada2-QC-collapse-rm_singletons-
 cd /Users/yanren/workdir工作区/qc蒲师姐/relative/table_rep_dada2-QC-collapse-rm_singletons-Class-relative/data
 biom convert -i feature-table.biom -o table_rep_dada2-QC-collapse-rm_singletons-Class-relative.txt --to-tsv
 
+
+
+
+qiime feature-classifier extract-reads --i-sequences silva-138-99-seqs.qza --p-n-jobs 30 --o-reads ref-seqs.qza --p-f-primer GTGYCAGCMGCCGCGGTAA --p-r-primer GGACTACNVGGGTWTCTAAT
+
+qiime feature-classifier fit-classifier fit-classifier-navie-bayes --i-reference-reads ref-seqs.qza --i-reference-taxonomy silva-138-99-tax.qza --o-classifier silva-138-99_v4_classifier.qza
+
+
+qiime feature-classifier classify-sklearn \
+--i-classifier silva-138-99_v4_classifier.qza \
+--i-reads seqs_rep_dada2-QC.qza \
+--o-classification taxonomy-annotation_v2.qza
+
+
